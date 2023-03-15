@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function () {
+    Route::group(['prefix' => 'users'], function() {
+        Route::post('','API\UserController@add');
+        Route::get('/{id}','API\UserController@get');
+        Route::get('/all','API\UserController@getAll');
+        Route::post('','API\UserController@edit');
+        Route::delete('/{id}','API\UserController@delete');
+    });
 });
